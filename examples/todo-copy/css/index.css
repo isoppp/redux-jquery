@@ -1,0 +1,103 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.l-body {
+  margin:20px auto;
+  padding:20px;
+  width:95%;
+  border:1px solid #ddd;
+}
+.section {
+  margin-bottom:20px;
+}
+.title {
+  margin-bottom:20px;
+  font-size:24px;
+  font-weight:bold;
+  border-left:5px solid skyblue;
+  border-bottom:1px solid skyblue;
+  padding-left:10px;
+}
+
+.subTitle {
+  margin-bottom:10px;
+  font-size:16px;
+  border-left:3px solid cornflowerblue;
+  padding-left:5px;
+}
+
+/* cf */
+.cf:before,
+.cf:after {
+  content: " ";
+  display: table;
+}
+
+.cf:after {
+  clear: both;
+}
+
+.cf {
+  *zoom: 1;
+}
+
+/*input*/
+.mod-input{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border:1px solid cadetblue;
+  margin-right:10px;
+}
+
+/*btn*/
+.mod-btn{
+  display: inline-block;
+  color: cadetblue;
+  border:1px solid cadetblue;
+  padding:1px 7px;
+  cursor: pointer;
+}
+
+.mod-btn:hover,
+.mod-btn:focus{
+  color: white;
+  background-color: cadetblue;
+  border:1px solid #eee;
+}
+
+.mod-btn.is-current {
+  color: white;
+  background-color: cadetblue;
+  border:1px solid #eee;
+}
+
+/*list*/
+.todoList{
+  border-top:1px solid dodgerblue;
+  border-bottom:1px solid dodgerblue;
+}
+
+.todoList-item {
+  padding: 10px;
+  border-bottom:1px solid dodgerblue;
+}
+
+.todoList-item-text {
+  float: left;
+}
+.todoList-item-btn {
+  float: right;
+  margin-right:10px;
+}
+
+.todoList-item.is-complete {
+  color: #aaa;
+  background-color: #eee;
+}
+
+.todoList-item:last-child{
+  border-bottom:none;
+}
