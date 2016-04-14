@@ -3,6 +3,6 @@ import { TodoReducer } from './TodoReducer';
 import { FilterReducer } from './FilterReducer';
 
 export const RootReducer = combineReducers({
-  addTodo: TodoReducer,
+  todo: TodoReducer,
   filterTodo: FilterReducer
 });

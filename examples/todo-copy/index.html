@@ -22,16 +22,20 @@
 </section>
 
 <section class="section">
-<ul class="todoList js−todoList">
-<li class="todoList-item cf"><span class="todoList-item-elem">activeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_complete js-btnComplete">complete</span></li>
-<li class="todoList-item cf"><span class="todoList-item-elem">activeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_complete js-btnComplete">complete</span></li>
-<li class="todoList-item is-complete cf"><span class="todoList-item-elem">completeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_active js-btnActive">active</span></li>
-<li class="todoList-item is-complete cf"><span class="todoList-item-elem">completeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_active js-btnActive">active</span></li>
-<li class="todoList-item cf"><span class="todoList-item-elem">activeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_complete js-btnComplete">complete</span></li>
-<li class="todoList-item cf"><span class="todoList-item-elem">activeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_complete js-btnComplete">complete</span></li>
-</ul>
+<div class="todoList js−todoList">
+<div class="todoList-item is-complete cf js-todoItemComplete"><span class="todoList-item-elem">completeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_active js-btnActive">active</span></div>
+<div class="todoList-item cf js-todoItemActive"><span class="todoList-item-elem">activeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_complete js-btnComplete">complete</span></div>
+<div class="todoList-item is-complete cf js-todoItemComplete"><span class="todoList-item-elem">completeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_active js-btnActive">active</span></div>
+<div class="todoList-item is-complete cf js-todoItemComplete"><span class="todoList-item-elem">completeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_active js-btnActive">active</span></div>
+<div class="todoList-item cf js-todoItemActive"><span class="todoList-item-elem">activeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_complete js-btnComplete">complete</span></div>
+<div class="todoList-item cf js-todoItemActive"><span class="todoList-item-elem">activeTodo</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_complete js-btnComplete">complete</span></div>
+</div>
 </section>
 
+<section class="js-template" style="display: none;">
+<div class="todoList-item cf js-todoItemActive"><span class="todoList-item-elem"></span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_complete js-btnComplete">complete</span></div>
+<div class="todoList-item is-complete cf js-todoItemComplete"><span class="todoList-item-elem"></span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_active js-btnActive">active</span></div>
+</section>
 </div><!--l-body-->
 
 <script src="../../build/todo-copy/js/index.js"></script>
