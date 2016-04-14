@@ -6,11 +6,15 @@ import {FILTER_STATUS, TODO_STATUS} from '../contents/contents';
 export default class Todo extends BaseComponent {
   constructor(selector, store) {
     super(selector, store, 'todo', 'filterTodo');
+
+    // init
     this.$input = this.$selector.find('.js-todoInput');
     this.$btnAdd = this.$selector.find('.js-todoAddBtn');
+
     this.$filterAll = this.$selector.find('.js-todoFilterAll');
     this.$filterActive = this.$selector.find('.js-todoFilterActive');
     this.$filterComplete = this.$selector.find('.js-todoFilterComplete');
+
     this.$todoList = this.$selector.find('.js−todoList');
     this.$todoListItem = this.$todoList.find('.todoList-item');
 
@@ -18,10 +22,21 @@ export default class Todo extends BaseComponent {
     this.$templateActive = this.$template.find('.js-todoItemActive');
     this.$templateComplete = this.$template.find('.js-todoItemComplete');
 
+    // add event
+    this.$btnAdd.on('click', ()=> {
+      if(this.$input.val() === '') return;
+      this.dispatch(actions.addTodo(this.$input.val()));
+    });
+
+    // filter event
     this.$filterAll.on('click', ()=> this.dispatch(actions.filterTodo(FILTER_STATUS.ALL)));
     this.$filterActive.on('click', ()=> this.dispatch(actions.filterTodo(FILTER_STATUS.ACTIVE)));
     this.$filterComplete.on('click', ()=> this.dispatch(actions.filterTodo(FILTER_STATUS.COMPLETE)));
-    this.$btnAdd.on('click', ()=> this.dispatch(actions.addTodo(this.$input.val())));
+
+    // todoo btn event
+    this.$todoList.on('click', '.js-btnActive', (e) => this.dispatch(actions.activeTodo($(e.target).closest('.todoList-item').attr('data-id'))));
+    this.$todoList.on('click', '.js-btnComplete', (e) => this.dispatch(actions.completeTodo($(e.target).closest('.todoList-item').attr('data-id'))));
+    this.$todoList.on('click', '.js-btnDelete', (e) => this.dispatch(actions.deleteTodo($(e.target).closest('.todoList-item').attr('data-id'))));
 
     this.dispatch(actions.initialize(this.createInitData()));
   }
@@ -60,18 +75,13 @@ export default class Todo extends BaseComponent {
     $btn.addClass('is-active');
   }
 
-  makeTodoItem(title) {
-    return `<li class="todoList-item cf"><span class="todoList-item-elem">${title}</span><span class="todoList-item-btn mod-btn mod-btn_delete js-btnDelete">delete</span><span class="todoList-item-btn mod-btn mod-btn_complete js-btnComplete">complete</span></li>`
-  }
-
   render() {
-
     // make todo list
     let result = '';
     this.state.todo.forEach((obj, i) => {
       let dom;
       dom = obj.status === TODO_STATUS.ACTIVE ? this.$templateActive : this.$templateComplete;
-      dom.attr('id', `todo${obj.id}`);
+      dom.attr('data-id', obj.id);
       dom.find('.todoList-item-elem').text(obj.name);
       result += dom.prop('outerHTML');
     });
