@@ -1,31 +1,33 @@
 * {
-  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 .l-body {
-  margin:20px auto;
-  padding:20px;
-  width:95%;
-  border:1px solid #ddd;
+  border: 1px solid #DDD;
+  color: #444;
+  margin: 20px auto;
+  padding: 20px;
+  width: 95%;
 }
 .section {
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 .title {
-  margin-bottom:20px;
-  font-size:24px;
-  font-weight:bold;
-  border-left:5px solid skyblue;
-  border-bottom:1px solid skyblue;
-  padding-left:10px;
+  border-bottom: 1px solid skyblue;
+  border-left: 5px solid skyblue;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-left: 10px;
 }
 
 .subTitle {
-  margin-bottom:10px;
-  font-size:16px;
-  border-left:3px solid cornflowerblue;
-  padding-left:5px;
+  border-left: 3px solid cornflowerblue;
+  font-size: 16px;
+  margin-bottom: 10px;
+  padding-left: 5px;
 }
 
 /* cf */
@@ -44,45 +46,88 @@
 }
 
 /*input*/
-.mod-input{
+.mod-input {
+  appearance: none;
+  border: 1px solid cadetblue;
+  margin-right: 10px;
+
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
-  border:1px solid cadetblue;
-  margin-right:10px;
 }
 
 /*btn*/
-.mod-btn{
-  display: inline-block;
+.mod-btn {
+  border: 1px solid cadetblue;
   color: cadetblue;
-  border:1px solid cadetblue;
-  padding:1px 7px;
   cursor: pointer;
+  display: inline-block;
+  min-width: 90px;
+  padding: 1px 7px;
+  text-align: center;
 }
 
 .mod-btn:hover,
-.mod-btn:focus{
-  color: white;
+.mod-btn:focus {
   background-color: cadetblue;
-  border:1px solid #eee;
+  border: 1px solid #EEE;
+  color: white;
+  opacity: .75;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
 }
 
-.mod-btn.is-current {
-  color: white;
+
+.mod-btn.is-active {
   background-color: cadetblue;
-  border:1px solid #eee;
+  border: 1px solid #EEE;
+  color: white;
+}
+
+.mod-btn_delete {
+  border-color: darkgray;
+  color: darkgray;
+}
+
+.mod-btn_delete:hover,
+.mod-btn_delete:focus,
+.mod-btn_delete.is-active {
+  background-color: darkgray;
+}
+
+.mod-btn_complete {
+  border-color: orangered;
+  color: orangered;
+}
+
+.mod-btn_complete:hover,
+.mod-btn_complete:focus,
+.mod-btn_complete.is-active {
+  background-color: orangered;
+}
+
+.mod-btn_active {
+  border-color: yellowgreen;
+  color: yellowgreen;
+}
+
+.mod-btn_active:hover,
+.mod-btn_active:focus,
+.mod-btn_active.is-active {
+  background-color: yellowgreen;
 }
 
 /*list*/
-.todoList{
-  border-top:1px solid dodgerblue;
-  border-bottom:1px solid dodgerblue;
+.todoList {
+  border-bottom: 1px solid dodgerblue;
+  border-top: 1px solid dodgerblue;
 }
 
 .todoList-item {
+  border-bottom: 1px solid dodgerblue;
   padding: 10px;
-  border-bottom:1px solid dodgerblue;
 }
 
 .todoList-item-text {
@@ -90,14 +135,18 @@
 }
 .todoList-item-btn {
   float: right;
-  margin-right:10px;
+  margin-right: 10px;
 }
 
 .todoList-item.is-complete {
-  color: #aaa;
-  background-color: #eee;
+  background-color: #fafafa;
+  color: #AAA;
 }
 
-.todoList-item:last-child{
-  border-bottom:none;
+.todoList-item.is-complete .todoList-item-elem {
+  text-decoration: line-through;
+}
+
+.todoList-item:last-child {
+  border-bottom: none;
 }
