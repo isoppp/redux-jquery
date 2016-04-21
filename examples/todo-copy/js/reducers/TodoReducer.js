@@ -23,7 +23,5 @@ export const TodoReducer = handleActions({
     state[i].status = TODO_STATUS.ACTIVE;
     return [...state];
   },
-  [COMPLETE_TODO]: (state, action) => {
-    return state.map((todo)=> todo.id === Number(action.payload) ? todo.status = TODO_STATUS.COMPLETE : todo);
-  }
+  [COMPLETE_TODO]: (state, action) => state.map((todo)=> todo.id === Number(action.payload) ? todo.status = TODO_STATUS.COMPLETE : todo)
 }, INITIAL_STATE);
