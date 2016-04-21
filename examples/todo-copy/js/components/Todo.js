@@ -11,9 +11,10 @@ export default class Todo extends BaseComponent {
     this.$input = this.$selector.find('.js-todoInput');
     this.$btnAdd = this.$selector.find('.js-todoAddBtn');
 
-    this.$filterAll = this.$selector.find('.js-todoFilterAll');
-    this.$filterActive = this.$selector.find('.js-todoFilterActive');
-    this.$filterComplete = this.$selector.find('.js-todoFilterComplete');
+    this.$filterWrapper = this.$selector.find('.js-todoFilter');
+    this.$filterAll = this.$filterWrapper.find('.js-todoFilterAll');
+    this.$filterActive = this.$filterWrapper.find('.js-todoFilterActive');
+    this.$filterComplete = this.$filterWrapper.find('.js-todoFilterComplete');
 
     this.$todoList = this.$selector.find('.js−todoList');
     this.$todoListItem = this.$todoList.find('.todoList-item');
@@ -23,15 +24,15 @@ export default class Todo extends BaseComponent {
     this.$templateComplete = this.$template.find('.js-todoItemComplete');
 
     // add event
-    this.$btnAdd.on('click', ()=> {
-      if(this.$input.val() === '') return;
+    this.$btnAdd.on('click', () => {
+      if (this.$input.val() === '') return;
       this.dispatch(actions.addTodo(this.$input.val()));
     });
 
     // filter event
-    this.$filterAll.on('click', ()=> this.dispatch(actions.filterTodo(FILTER_STATUS.ALL)));
-    this.$filterActive.on('click', ()=> this.dispatch(actions.filterTodo(FILTER_STATUS.ACTIVE)));
-    this.$filterComplete.on('click', ()=> this.dispatch(actions.filterTodo(FILTER_STATUS.COMPLETE)));
+    this.$filterAll.on('click', () => this.dispatch(actions.filterTodo(FILTER_STATUS.ALL)));
+    this.$filterActive.on('click', () => this.dispatch(actions.filterTodo(FILTER_STATUS.ACTIVE)));
+    this.$filterComplete.on('click', () => this.dispatch(actions.filterTodo(FILTER_STATUS.COMPLETE)));
 
     // todoo btn event
     this.$todoList.on('click', '.js-btnActive', (e) => this.dispatch(actions.activeTodo($(e.target).closest('.todoList-item').attr('data-id'))));
@@ -54,57 +55,34 @@ export default class Todo extends BaseComponent {
     return arr;
   }
 
-  filterAll() {
-    this.$todoList.find('.todoList-item').show();
-  }
-
-  filterActive() {
-    this.$todoList.find('.todoList-item').show();
-    this.$todoList.find('.todoList-item.is-complete').hide();
-  }
-
-  filterComplete() {
-    this.$todoList.find('.todoList-item').hide();
-    this.$todoList.find('.todoList-item.is-complete').show();
-  }
-
   changeActiveButton($btn) {
-    this.$filterAll.removeClass('is-active');
-    this.$filterActive.removeClass('is-active');
-    this.$filterComplete.removeClass('is-active');
+    this.$filterWrapper.find('.is-active').removeClass('is-active');
     $btn.addClass('is-active');
   }
 
   render() {
-    // make todo list
-    let result = '';
-    this.state.todo.forEach((obj, i) => {
-      let dom;
-      dom = obj.status === TODO_STATUS.ACTIVE ? this.$templateActive : this.$templateComplete;
-      dom.attr('data-id', obj.id);
-      dom.find('.todoList-item-elem').text(obj.name);
-      result += dom.prop('outerHTML');
-    });
-    this.$todoList.html(result);
+    this.$todoList.html(this.state.todo.map((todo) => {
+      if (todo.status !== FILTER_STATUS.ALL && todo.status !== this.state.filterTodo) return;
+      const dom = todo.status === TODO_STATUS.ACTIVE ? this.$templateActive.clone() : this.$templateComplete.clone();
+      dom.attr('data-id', todo.id);
+      dom.find('.todoList-item-elem').text(todo.name);
+      return dom;
+    }));
 
     // switch filter
     switch (this.state.filterTodo) {
       case FILTER_STATUS.ALL:
-        this.filterAll();
         this.changeActiveButton(this.$filterAll);
         break;
       case FILTER_STATUS.ACTIVE:
-        this.filterActive();
         this.changeActiveButton(this.$filterActive);
         break;
       case FILTER_STATUS.COMPLETE:
-        this.filterComplete();
         this.changeActiveButton(this.$filterComplete);
         break;
       default:
         break;
     }
-
   }
 }
 
