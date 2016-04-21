@@ -3,12 +3,10 @@ import {ADD_TODO, DELETE_TODO, ACTIVE_TODO, COMPLETE_TODO, INITIALIZE} from '../
 import {TODO_STATUS} from '../contents/contents';
 
 // 初期値
-const INITIAL_STATE = {};
+const INITIAL_STATE = [{name: 'name', id: 0, status: TODO_STATUS.ACTIVE}];
 
 export const TodoReducer = handleActions({
-  [INITIALIZE]: (state, action) => {
-    return action.payload
-  },
+  [INITIALIZE]: (state, action) => action.payload,
   [ADD_TODO]: (state, action) => {
     return [
       {
@@ -26,8 +24,6 @@ export const TodoReducer = handleActions({
     return [...state];
   },
   [COMPLETE_TODO]: (state, action) => {
-    const i = state.findIndex((todo) => todo.id === Number(action.payload));
-    state[i] = Object.assign({}, state[i], {status: TODO_STATUS.COMPLETE});
-    return [...state];
+    return state.map((todo)=> todo.id === Number(action.payload) ? todo.status = TODO_STATUS.COMPLETE : todo);
   }
 }, INITIAL_STATE);
