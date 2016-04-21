@@ -62,7 +62,7 @@ export default class Todo extends BaseComponent {
 
   render() {
     this.$todoList.html(this.state.todo.map((todo) => {
-      if (todo.status !== FILTER_STATUS.ALL && todo.status !== this.state.filterTodo) return;
+      if (this.state.filterTodo !== FILTER_STATUS.ALL && todo.status !== this.state.filterTodo) return;
       const dom = todo.status === TODO_STATUS.ACTIVE ? this.$templateActive.clone() : this.$templateComplete.clone();
       dom.attr('data-id', todo.id);
       dom.find('.todoList-item-elem').text(todo.name);
