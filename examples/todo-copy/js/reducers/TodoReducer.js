@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import {handleActions} from 'redux-actions';
 import {ADD_TODO, DELETE_TODO, ACTIVE_TODO, COMPLETE_TODO, INITIALIZE} from '../actions/ActionCreator';
 import {TODO_STATUS} from '../contents/contents';
@@ -6,7 +7,14 @@ import {TODO_STATUS} from '../contents/contents';
 const INITIAL_STATE = [{name: 'name', id: 0, status: TODO_STATUS.ACTIVE}];
 
 export const TodoReducer = handleActions({
-  [INITIALIZE]: (state, action) => action.payload,
+  [INITIALIZE]: (state, action) => $.map(action.payload, (elem, i) => {
+    const $elem = $(elem);
+    return {
+      id: i,
+      status: $elem.hasClass('is-complete') ? TODO_STATUS.COMPLETE : TODO_STATUS.ACTIVE,
+      name: $elem.find('.todoList-item-elem').text()
+    }
+  }),
   [ADD_TODO]: (state, action) => {
     return [
       {
@@ -18,10 +26,6 @@ export const TodoReducer = handleActions({
     ]
   },
   [DELETE_TODO]: (state, action) => state.filter((todo) => todo.id !== Number(action.payload)),
-  [ACTIVE_TODO]: (state, action) => {
-    const i = state.findIndex((todo) => todo.id === Number(action.payload));
-    state[i].status = TODO_STATUS.ACTIVE;
-    return [...state];
-  },
-  [COMPLETE_TODO]: (state, action) => state.map((todo)=> todo.id === Number(action.payload) ? todo.status = TODO_STATUS.COMPLETE : todo)
+  [ACTIVE_TODO]: (state, action) => state.map((todo) => todo.id === Number(action.payload) ? todo.status = TODO_STATUS.ACTIVE : todo),
+  [COMPLETE_TODO]: (state, action) => state.map((todo) => todo.id === Number(action.payload) ? todo.status = TODO_STATUS.COMPLETE : todo)
 }, INITIAL_STATE);

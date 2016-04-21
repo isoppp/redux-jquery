@@ -39,20 +39,7 @@ export default class Todo extends BaseComponent {
     this.$todoList.on('click', '.js-btnComplete', (e) => this.dispatch(actions.completeTodo($(e.target).closest('.todoList-item').attr('data-id'))));
     this.$todoList.on('click', '.js-btnDelete', (e) => this.dispatch(actions.deleteTodo($(e.target).closest('.todoList-item').attr('data-id'))));
 
-    this.dispatch(actions.initialize(this.createInitData()));
-  }
-
-  createInitData() {
-    let arr = [];
-    this.$todoListItem.each((i, el) => {
-      const $elem = $(el);
-      arr.push({
-        id: i,
-        status: $elem.hasClass('is-complete') ? TODO_STATUS.COMPLETE : TODO_STATUS.ACTIVE,
-        name: $elem.find('.todoList-item-elem').text()
-      })
-    });
-    return arr;
+    this.dispatch(actions.initialize(this.$todoListItem));
   }
 
   changeActiveButton($btn) {
